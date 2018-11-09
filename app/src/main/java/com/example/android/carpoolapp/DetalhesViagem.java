@@ -11,5 +11,3 @@ public class DetalhesViagem extends AppCompatActivity {
         setContentView(R.layout.activity_detalhes_viagem);
     }
 }
-
-//amostra

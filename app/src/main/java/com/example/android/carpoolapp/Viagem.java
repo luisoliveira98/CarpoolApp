@@ -1,11 +1,12 @@
 package com.example.android.carpoolapp;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+import com.google.firebase.database.IgnoreExtraProperties;
 
+@IgnoreExtraProperties
 public class Viagem {
 
     private int id;
+    private int userId;
     private String pontoPartida;
     private String pontoDestino;
     private String data;
@@ -13,6 +14,10 @@ public class Viagem {
     private int lugaresDisponiveis;
     private double precoPassageiro;
     private String comentarios;
+
+    public Viagem() {
+
+    }
 
     /*
    Getters and Setters
@@ -22,6 +27,12 @@ public class Viagem {
     }
     public void setId(int id) {
         this.id = id;
+    }
+    public int getUserId(){
+        return userId;
+    }
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
     public String getPontoPartida() {
         return pontoPartida;
