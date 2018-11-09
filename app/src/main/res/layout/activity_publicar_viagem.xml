@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PublicarViagem">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/inputPartida"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="16dp"
+                android:hint="@string/de"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/inputDestino"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="8dp"
+                android:hint="@string/para"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/textDataHora"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="24dp"
+                android:text="@string/data_e_hora_de_partida"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/inputDate"
+                android:layout_width="144dp"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="8dp"
+                android:hint="@string/dd_mm_aaaa"
+                android:inputType="date" />
+
+            <EditText
+                android:id="@+id/inputHora"
+                android:layout_width="144dp"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="8dp"
+                android:hint="@string/hh_mm"
+                android:inputType="time" />
+
+            <TextView
+                android:id="@+id/textLugares"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="24dp"
+                android:text="@string/lugares_dipon_veis"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/inputLugares"
+                android:layout_width="86dp"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="8dp"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/textPreco"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="16dp"
+                android:text="@string/pre_o_por_passageiro"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/inputPreco"
+                android:layout_width="86dp"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="8dp"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/textComentario"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="16dp"
+                android:text="@string/coment_rios"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/inputComentario"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="8dp"
+                android:inputType="textMultiLine" />
+
+            <Button
+                android:id="@+id/buttonPublicar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:onClick="publicar"
+                android:text="@string/publicar"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

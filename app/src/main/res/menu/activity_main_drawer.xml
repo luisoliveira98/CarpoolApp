@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_publicar"
+            android:icon="@drawable/ic_create_black_24dp"
+            android:title="@string/publicar" />
+        <item
+            android:id="@+id/nav_procurar"
+            android:icon="@drawable/ic_procurar"
+            android:title="@string/procurar" />
+        <item
+            android:id="@+id/nav_mensagens"
+            android:icon="@drawable/ic_mensagens"
+            android:title="@string/mensagens" />
+        <item
+            android:id="@+id/nav_historico"
+            android:icon="@drawable/ic_historico"
+            android:title="@string/hist_rico" />
+        <item
+            android:id="@+id/nav_perfil"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="@string/perfil" />
+    </group>
+
+</menu>
