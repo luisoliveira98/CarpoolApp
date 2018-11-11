@@ -20,7 +20,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SignInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
@@ -29,8 +39,13 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
 
     //Firebase instance variables
     private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
     private SignInButton mSignInButton;
     private GoogleApiClient mGoogleApiClient;
+
+    //FirebaseDatabase
+    private DatabaseReference mFirebaseDatabaseReference;
+    private List<String> userEmailList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +71,10 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         // Initialize FirebaseAuth
         //Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
+        //Initialize FirebaseDatabase
+        mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        userEmailList = new ArrayList<>();
+
     }
 
     @Override
@@ -115,6 +134,31 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                             Toast.makeText(SignInActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
+                            //Toast.makeText(getApplicationContext(), "Login feito com sucesso", Toast.LENGTH_LONG).show();
+
+                            mFirebaseUser = mFirebaseAuth.getCurrentUser();
+
+                            Query query = mFirebaseDatabaseReference.child("users");
+                            query.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                        String temp = data.getValue(User.class).getEmail();
+                                        userEmailList.add(temp);
+                                    }
+
+                                    if(!userEmailList.contains(mFirebaseUser.getEmail())) {
+                                        User user = new User(mFirebaseUser.getDisplayName(), mFirebaseUser.getEmail());
+                                        mFirebaseDatabaseReference.child("users").push().setValue(user);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
                             startActivity(new Intent(SignInActivity.this, MainActivity.class));
                             finish();
                         }

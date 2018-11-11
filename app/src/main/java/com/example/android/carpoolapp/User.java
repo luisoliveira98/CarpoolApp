@@ -8,9 +8,17 @@ public class User {
     private double classificacao;
     private Carro carro;
 
+    public User() {
+
+    }
+
     public User(String nome, String email) {
         this.nome = nome;
         this.email = email;
+        this.telemovel = "";
+        this.cidade = "";
+        this.classificacao = 0;
+        this.carro = null;
     }
 
     public String getNome() {
@@ -44,7 +52,7 @@ public class User {
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
-
+/*
     public double getClassificacao() {
         return classificacao;
     }
@@ -52,7 +60,7 @@ public class User {
     public void setClassificacao(double classificacao) {
         this.classificacao = classificacao;
     }
-
+*/
     public Carro getCarro() {
         return carro;
     }
