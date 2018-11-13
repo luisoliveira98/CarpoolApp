@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.carpoolapp">
 
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -49,13 +50,7 @@
                 android:value="com.example.android.carpoolapp.MainActivity" />
             >
         </activity>
-        <activity android:name=".Resultados"
-            android:label = "@string/resultados_activity"
-            android:parentActivityName=".ProcurarViagem">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.carpoolapp.ProcurarViagem"/>
-        </activity>
+        <activity android:name=".Resultados"></activity>
     </application>
 
 </manifest>

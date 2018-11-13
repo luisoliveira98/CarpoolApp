@@ -27,7 +27,9 @@
     <string name="sign_out">Sign Out</string>
     <string name="procurar_button">Procurar</string>
     <string name="resultados_activity">Resultados</string>
-    <string name="data_picker_button">Data</string>
+    <string name="data_picker_button">Selecione uma Data</string>
     <string name="dataPicker">dataPicker</string>
-    <string name="data_button">DATA</string>
+    <string name="data_button">Selecione uma Data</string>
+    <string name="pick_hora">Selecione uma hora</string>
+    <string name="timePicker">timePicker</string>
 </resources>

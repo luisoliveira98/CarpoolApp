@@ -2,12 +2,15 @@ package com.example.android.carpoolapp;
 
 import android.content.Intent;
 import android.provider.ContactsContract;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,40 +23,39 @@ import java.util.List;
 
 public class Resultados extends AppCompatActivity {
 
-    private ListView listVProcurar;
+    public static final String EXTRA_VIAGEM_KEY = "viagem_key";
 
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
-    private List<Viagem> viagemList = new ArrayList<Viagem>();
-    private ArrayAdapter<Viagem> viagemArrayAdapter;
+    private FirebaseDatabase mFirebaseDatabase;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
+    private DatabaseReference mViagemReference;
+    private String mViagemKey;
+
+    private ListView mListView;
+
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_resultados);
-        initializeComponents();
-        initializeFirebase();
+        setContentView(R.layout.activity_view_results);
 
-    }
+        mViagemKey = getIntent().getStringExtra(EXTRA_VIAGEM_KEY);
 
-    //String part, String dest, String date, String hr
+        mListView = (ListView) findViewById(R.id.listview);
+        if (mViagemKey == null) {
+            throw new IllegalArgumentException("Must pass EXTRA_VIAGEM_KEY");
+        }
 
-    private void procurarViagem(String part, String dest, String date, String hr){
-        Query query = databaseReference.child("Viagem");
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mViagemReference = mFirebaseDatabase.getReference().child("viagens").child("mViagemKey");
+        //FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
-        viagemList.clear();
-
-        query.addValueEventListener(new ValueEventListener() {
+        mViagemReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot objSnapshot:dataSnapshot.getChildren()){
-                    Viagem v = objSnapshot.getValue(Viagem.class);
-                    viagemList.add(v);
-                }
-
-                viagemArrayAdapter = new ArrayAdapter<Viagem>(Resultados.this, android.R.layout.simple_list_item_1, viagemList);
-                listVProcurar.setAdapter(viagemArrayAdapter);
-
+                showViagens(dataSnapshot);
             }
 
             @Override
@@ -64,19 +66,22 @@ public class Resultados extends AppCompatActivity {
 
     }
 
-    private void initializeFirebase() {
-        FirebaseApp.initializeApp(Resultados.this);
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-    }
+    private void showViagens(DataSnapshot dataSnapshot) {
+        for (DataSnapshot ds: dataSnapshot.getChildren()){
+            Viagem v = new Viagem();
+            v.setPontoPartida(ds.child(mViagemKey).getValue(Viagem.class).getPontoPartida());
+            v.setPontoDestino(ds.child(mViagemKey).getValue(Viagem.class).getPontoDestino());
+            v.setData(ds.child(mViagemKey).getValue(Viagem.class).getData());
+            v.setHora(ds.child(mViagemKey).getValue(Viagem.class).getHora());
 
-    private void initializeComponents(){
-        listVProcurar = (ListView) findViewById(R.id.listVProcurar);
-        Intent intent = getIntent();
-        String partida = intent.getStringExtra(ProcurarViagem.PARTIDA);
-        String data = intent.getStringExtra(ProcurarViagem.DATA);
-        String destino = intent.getStringExtra(ProcurarViagem.DESTINO);
-        String hora = intent.getStringExtra(ProcurarViagem.HORA);
+            ArrayList<String> array = new ArrayList<>();
+            array.add(v.getPontoDestino());
+            array.add(v.getPontoDestino());
+            array.add(v.getData());
+            array.add(v.getHora());
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, array);
+            mListView.setAdapter(adapter);
+        }
     }
 
 }

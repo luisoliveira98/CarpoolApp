@@ -22,62 +22,37 @@
 
     <EditText
         android:id="@+id/inputPDestino"
-        android:layout_width="336dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/para"
-        android:inputType="text"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="70dp" />
-
-    <TextView
-        android:id="@+id/textPDataHora"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:text="Hora:"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/data_picker" />
-
-    <EditText
-        android:id="@+id/inputHora"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="200dp"
         android:ems="10"
-        android:hint="@string/hh_mm"
-        android:inputType="time"
+        android:hint="@string/para"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textPDataHora" />
+        app:layout_constraintTop_toBottomOf="@+id/editPPartida" />
 
     <Button
         android:id="@+id/buttonProcurar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:onClick="showResults"
         android:text="@string/procurar_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputHora" />
+        app:layout_constraintTop_toBottomOf="@+id/time_picker" />
 
     <Button
         android:id="@+id/data_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:onClick="showDataPicker"
         android:text="@string/data_picker_button"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,9 +67,33 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/textPDataHora"
+        app:layout_constraintBottom_toTopOf="@+id/time_picker"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/data_picker"
         app:layout_constraintTop_toBottomOf="@+id/inputPDestino" />
+
+    <Button
+        android:id="@+id/time_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="showTimePicker"
+        android:text="@string/pick_hora"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/data_picker" />
+
+    <TextView
+        android:id="@+id/showTime"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonProcurar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/time_picker"
+        app:layout_constraintTop_toBottomOf="@+id/showDate" />
 
 </android.support.constraint.ConstraintLayout>

@@ -20,13 +20,12 @@ public class PublicarViagem extends AppCompatActivity {
 
     private EditText partida,
                     destino,
-                    //data,
-                    hora,
                     lugares,
                     preco,
                     comentarios;
     private Button publicar;
-    TextView data;
+    private TextView data;
+    private TextView showtime;
 
     //firebase
     private DatabaseReference mFirebaseDatabaseReference;
@@ -41,7 +40,7 @@ public class PublicarViagem extends AppCompatActivity {
         partida = findViewById(R.id.inputPartida);
         destino = findViewById(R.id.inputDestino);
         data = (TextView) findViewById(R.id.showData);
-        hora = findViewById(R.id.inputHora);
+        showtime = findViewById(R.id.showTimee);
         lugares = findViewById(R.id.inputLugares);
         preco = findViewById(R.id.inputPreco);
         comentarios = findViewById(R.id.inputComentario);
@@ -62,7 +61,7 @@ public class PublicarViagem extends AppCompatActivity {
         viagem.setPontoPartida(partida.getText().toString());
         viagem.setPontoDestino(destino.getText().toString());
         viagem.setData(data.getText().toString());
-        viagem.setHora(hora.getText().toString());
+        viagem.setHora(showtime.toString());
         viagem.setLugaresDisponiveis(Integer.parseInt(lugares.getText().toString()));
         viagem.setPrecoPassageiro(Double.parseDouble(preco.getText().toString()));
         viagem.setComentarios(comentarios.getText().toString());
@@ -100,5 +99,16 @@ public class PublicarViagem extends AppCompatActivity {
         String date = Integer.toString(day) + "/" + Integer.toString(month+1) + "/" + Integer.toString(year);
         data.setText(date);
     }
+
+    public void showTimePicker(View view) {
+        DialogFragment timePicker = new TimePickerFragment2();
+        timePicker.show(getSupportFragmentManager(), getString(R.string.timePicker));
+    }
+
+    public void getTimeFromPicker(int hourOfDay, int minute) {
+        String time = Integer.toString(hourOfDay) + ":" + Integer.toString(minute);
+        showtime.setText(time);
+    }
+
 
 }

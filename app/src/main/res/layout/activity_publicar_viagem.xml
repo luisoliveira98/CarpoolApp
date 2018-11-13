@@ -46,22 +46,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <TextView
-                android:id="@+id/textDataHora"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginTop="24dp"
-                android:text="@string/data_e_hora_de_partida"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="showTimePicker"
+                android:text="@string/pick_hora" />
 
-            <EditText
-                android:id="@+id/inputHora"
-                android:layout_width="144dp"
-                android:layout_height="fill_parent"
-                android:layout_marginTop="8dp"
-                android:hint="@string/hh_mm"
-                android:inputType="time" />
+            <TextView
+                android:id="@+id/showTimee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/textLugares"
