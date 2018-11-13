@@ -1,12 +1,14 @@
 package com.example.android.carpoolapp;
 
 import android.content.DialogInterface;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,14 +17,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class PublicarViagem extends AppCompatActivity {
+
     private EditText partida,
                     destino,
-                    data,
+                    //data,
                     hora,
                     lugares,
                     preco,
                     comentarios;
     private Button publicar;
+    TextView data;
 
     //firebase
     private DatabaseReference mFirebaseDatabaseReference;
@@ -36,7 +40,7 @@ public class PublicarViagem extends AppCompatActivity {
         setContentView(R.layout.activity_publicar_viagem);
         partida = findViewById(R.id.inputPartida);
         destino = findViewById(R.id.inputDestino);
-        data = findViewById(R.id.inputDate);
+        data = (TextView) findViewById(R.id.showData);
         hora = findViewById(R.id.inputHora);
         lugares = findViewById(R.id.inputLugares);
         preco = findViewById(R.id.inputPreco);
@@ -86,4 +90,15 @@ public class PublicarViagem extends AppCompatActivity {
         AlertDialog alertDialog = alerta.create();
         alertDialog.show();
     }
+
+    public void showDataPicker(View view) {
+        DialogFragment dataPicker = new DataPickerFragment2();
+        dataPicker.show(getSupportFragmentManager(), getString(R.string.dataPicker));
+    }
+
+    public void getDateFromPicker(int year, int month, int day){
+        String date = Integer.toString(day) + "/" + Integer.toString(month+1) + "/" + Integer.toString(year);
+        data.setText(date);
+    }
+
 }

@@ -15,6 +15,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -39,7 +40,8 @@
         <activity
             android:name=".DetalhesViagem"
             android:label="Detalhes da Viagem" />
-        <activity android:name=".Perfil"
+        <activity
+            android:name=".Perfil"
             android:label="Perfil"
             android:parentActivityName=".MainActivity">
             <meta-data
@@ -47,7 +49,13 @@
                 android:value="com.example.android.carpoolapp.MainActivity" />
             >
         </activity>
-
+        <activity android:name=".Resultados"
+            android:label = "@string/resultados_activity"
+            android:parentActivityName=".ProcurarViagem">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.carpoolapp.ProcurarViagem"/>
+        </activity>
     </application>
 
 </manifest>

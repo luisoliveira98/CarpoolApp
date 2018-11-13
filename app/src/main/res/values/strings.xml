@@ -13,7 +13,7 @@
     <string name="perfil">Perfil</string>
     <string name="para">Para:</string>
     <string name="de">De:</string>
-    <string name="data_e_hora_de_partida">Data e Hora de Partida:</string>
+    <string name="data_e_hora_de_partida">Hora de Partida:</string>
     <string name="dd_mm_aaaa">dd/mm/aaaa</string>
     <string name="hh_mm">hh:mm</string>
     <string name="lugares_dipon_veis">Lugares diponíveis:</string>
@@ -25,4 +25,9 @@
     <string name="title_activity_sign_in">SignInActivity</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_out">Sign Out</string>
+    <string name="procurar_button">Procurar</string>
+    <string name="resultados_activity">Resultados</string>
+    <string name="data_picker_button">Data</string>
+    <string name="dataPicker">dataPicker</string>
+    <string name="data_button">DATA</string>
 </resources>
