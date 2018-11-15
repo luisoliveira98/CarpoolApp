@@ -1,10 +1,13 @@
 package com.example.android.carpoolapp;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -15,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -23,17 +27,26 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnConnectionFailedListener {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
+    private DatabaseReference mFirebaseDatabase;
     private String mPhotoUrl;
     private String mUsername;
     public static final String ANONYMOUS = "anonymous";
     private static final String TAG = "MainActivity";
     private GoogleApiClient mGoogleApiClient;
+    private User user;
+    private ProgressBar mProgressBar;
 
 
     @Override
@@ -43,15 +56,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
+        mProgressBar = findViewById(R.id.progressBar);
+        mProgressBar.setVisibility(ProgressBar.VISIBLE);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -80,6 +86,47 @@ public class MainActivity extends AppCompatActivity
                 .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API)
                 .build();
+
+        mFirebaseDatabase = FirebaseDatabase.getInstance().getReference();
+        user = new User();
+        Query query = mFirebaseDatabase.child("users");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User temp=null;
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    if(data.getValue(User.class).getEmail().equals(mFirebaseUser.getEmail())){
+                        temp = data.getValue(User.class);
+                        break;
+                    }
+                }
+                user = temp;
+                mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+                if(!user.complete()) {
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity.this);
+                    alerta.setTitle("Aviso");
+                    alerta
+                            .setIcon(R.mipmap.ic_warning)
+                            .setMessage("Não tem o perfil com todos os dados!\nAtualize os dados")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(MainActivity.this, UpdatePerfil.class);
+                                    intent.putExtra("user", user);
+                                    startActivity(intent);
+                                }
+                            })
+                            ;
+
+                    AlertDialog alertDialog = alerta.create();
+                    alertDialog.show();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 
     @Override
@@ -133,12 +180,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_procurar) {
             intent = new Intent(this, ProcurarViagem.class);
             startActivity(intent);
-        } else if (id == R.id.nav_mensagens) {
-
-        } else if (id == R.id.nav_historico) {
+        }  else if (id == R.id.nav_historico) {
 
         } else if (id == R.id.nav_perfil) {
             intent = new Intent(this, Perfil.class);
+            intent.putExtra("user", user);
             startActivity(intent);
         }
 

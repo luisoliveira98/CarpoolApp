@@ -1,6 +1,8 @@
 package com.example.android.carpoolapp;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String nome;
     private String email;
     private String telemovel;
@@ -52,7 +54,7 @@ public class User {
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
-/*
+
     public double getClassificacao() {
         return classificacao;
     }
@@ -60,12 +62,24 @@ public class User {
     public void setClassificacao(double classificacao) {
         this.classificacao = classificacao;
     }
-*/
+
     public Carro getCarro() {
         return carro;
     }
 
     public void setCarro(Carro carro) {
         this.carro = carro;
+    }
+
+    public Boolean complete() {
+        if (telemovel.equals("") || cidade.equals("") || carro==null) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return email;
     }
 }

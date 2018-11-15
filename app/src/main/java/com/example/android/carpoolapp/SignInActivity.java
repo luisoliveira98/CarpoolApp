@@ -149,7 +149,8 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
 
                                     if(!userEmailList.contains(mFirebaseUser.getEmail())) {
                                         User user = new User(mFirebaseUser.getDisplayName(), mFirebaseUser.getEmail());
-                                        mFirebaseDatabaseReference.child("users").push().setValue(user);
+                                        String key = mFirebaseUser.getEmail().split("@")[0];
+                                        mFirebaseDatabaseReference.child("users").child(key).setValue(user);
                                     }
                                 }
 
