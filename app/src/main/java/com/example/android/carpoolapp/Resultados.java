@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,9 +24,40 @@ import java.util.List;
 
 public class Resultados extends AppCompatActivity {
 
-    public static final String EXTRA_VIAGEM_KEY = "viagem_key";
+    private DatabaseReference mRef;
+    private ListView mList;
+    private List<Viagem> vList = new ArrayList<Viagem>();
+    private ArrayAdapter<Viagem> arrayAdapter;
 
-    private FirebaseDatabase mFirebaseDatabase;
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_view_results);
+
+        mRef = FirebaseDatabase.getInstance().getReference().child("viagens");
+        mList = (ListView) findViewById(R.id.list_resultado);
+
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                Viagem v = dataSnapshot1.getValue(Viagem.class);
+                vList.add(v);
+                }
+
+                arrayAdapter = new ArrayAdapter<Viagem>(Resultados.this, android.R.layout.simple_list_item_1, vList);
+                mList.setAdapter(arrayAdapter);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    /*    private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mViagemReference;
@@ -40,16 +72,11 @@ public class Resultados extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_results);
 
-        mViagemKey = getIntent().getStringExtra(EXTRA_VIAGEM_KEY);
-
         mListView = (ListView) findViewById(R.id.listview);
-        if (mViagemKey == null) {
-            throw new IllegalArgumentException("Must pass EXTRA_VIAGEM_KEY");
-        }
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mViagemReference = mFirebaseDatabase.getReference().child("viagens").child("mViagemKey");
+        mViagemReference = mFirebaseDatabase.getReference().child("viagens");
         //FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
         mViagemReference.addValueEventListener(new ValueEventListener() {
@@ -83,5 +110,5 @@ public class Resultados extends AppCompatActivity {
             mListView.setAdapter(adapter);
         }
     }
-
+*/
 }

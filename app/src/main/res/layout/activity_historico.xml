@@ -6,13 +6,13 @@
     <TextView
         android:textAlignment="center"
         android:textSize="25sp"
-        android:text="Resultados da pesquisa"
+        android:text="Histórico"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tvUserInfo"/>
 
     <ListView
-        android:id="@+id/list_resultado"
+        android:id="@+id/viagensLst"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
