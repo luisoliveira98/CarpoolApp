@@ -181,7 +181,8 @@ public class MainActivity extends AppCompatActivity
             intent = new Intent(this, ProcurarViagem.class);
             startActivity(intent);
         }  else if (id == R.id.nav_historico) {
-
+            intent = new Intent(this, Historico.class);
+            startActivity(intent);
         } else if (id == R.id.nav_perfil) {
             intent = new Intent(this, Perfil.class);
             intent.putExtra("user", user);

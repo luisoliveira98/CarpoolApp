@@ -53,8 +53,15 @@
         </activity>
         <activity android:name=".Resultados" />
         <activity android:name=".UpdatePerfil"
-                android:label="Editar Perfil"
-            ></activity>
+                android:label="Editar Perfil">
+        </activity>
+        <activity android:name=".Historico"
+            android:label="Histórico"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.carpoolapp.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
