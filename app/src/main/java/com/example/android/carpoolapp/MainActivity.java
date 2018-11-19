@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mFirebaseDatabase;
-    private String mPhotoUrl;
     private String mUsername;
+    private String userMail;//primeira parte do email
     public static final String ANONYMOUS = "anonymous";
     private static final String TAG = "MainActivity";
     private GoogleApiClient mGoogleApiClient;
@@ -77,9 +77,7 @@ public class MainActivity extends AppCompatActivity
             return;
         } else {
             mUsername = mFirebaseUser.getDisplayName();
-            if (mFirebaseUser.getPhotoUrl() != null) {
-                mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
-            }
+            userMail = mFirebaseUser.getEmail().split("@")[0];
         }
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -89,18 +87,11 @@ public class MainActivity extends AppCompatActivity
 
         mFirebaseDatabase = FirebaseDatabase.getInstance().getReference();
         user = new User();
-        Query query = mFirebaseDatabase.child("users");
+        Query query = mFirebaseDatabase.child("users").child(userMail);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                User temp=null;
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    if(data.getValue(User.class).getEmail().equals(mFirebaseUser.getEmail())){
-                        temp = data.getValue(User.class);
-                        break;
-                    }
-                }
-                user = temp;
+                user = dataSnapshot.getValue(User.class);
                 mProgressBar.setVisibility(ProgressBar.INVISIBLE);
                 if(!user.complete()) {
                     AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity.this);

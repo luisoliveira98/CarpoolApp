@@ -1,15 +1,22 @@
 package com.example.android.carpoolapp;
 
-public class Carro {
+import java.io.Serializable;
+
+public class Carro implements Serializable {
     private String marca,
                 modelo,
                 cor,
-                matricula;
-    private int ano;
+                matricula,
+                ano;
 
-    public Carro(String marca, String modelo, String cor, String matricula, int ano) {
+    public Carro(){
+
+    }
+
+    public Carro(String marca, String modelo, String cor, String matricula, String ano) {
         this.marca = marca;
         this.modelo = modelo;
+        this.cor = cor;
         this.matricula = matricula;
         this.ano = ano;
     }
@@ -46,11 +53,11 @@ public class Carro {
         this.matricula = matricula;
     }
 
-    public int getAno() {
+    public String getAno() {
         return ano;
     }
 
-    public void setAno(int ano) {
+    public void setAno(String ano) {
         this.ano = ano;
     }
 }
