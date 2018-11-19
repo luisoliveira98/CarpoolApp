@@ -6,4 +6,174 @@
     android:layout_height="match_parent"
     tools:context=".UpdatePerfil">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nome:"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <EditText
+                android:id="@+id/editNomePerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Nome"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textTelemovel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Número de Telemóvel:"
+                android:layout_marginTop="16dp"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editTelemovelPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Numero de Telemóvel"
+                android:inputType="phone" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cidade:"
+                android:layout_marginTop="16dp"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editCidadePerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Cidade"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/textCarro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="Carro - Informações"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textMarcaCarro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Marca:"
+                android:layout_marginTop="16dp"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editMarcaCarro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Marca do carro"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/textModeloCarro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Modelo:"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editModeloCarro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Modelo do carro"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/textCorCarro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cor:"
+                android:layout_marginTop="16dp"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editCorCarro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Cor do carro"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/textAnoCarro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ano:"
+                android:layout_marginTop="16dp"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editAnoCarro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Ano do carro"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/textMatriculaCarro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Matricula do Carro:"
+                android:layout_marginTop="16dp"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editMatriculaCarro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Matricula"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/buttonAtualizar"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:onClick="updatePerfil"
+                android:text="Atualizar" />
+
+        </LinearLayout>
+    </ScrollView>
+
 </android.support.constraint.ConstraintLayout>
