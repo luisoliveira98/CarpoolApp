@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_mostrarMapa"
+        app:showAsAction="never"
+        android:orderInCategory="100"
+        android:title="Ver percurso" />
+
+    <item
+        android:id="@+id/action_editar"
+        app:showAsAction="never"
+        android:orderInCategory="100"
+        android:title="Editar viagem" />
+
+    <item
+        android:id="@+id/action_eliminar"
+        app:showAsAction="never"
+        android:orderInCategory="100"
+        android:title="Eliminar viagem" />
+</menu>

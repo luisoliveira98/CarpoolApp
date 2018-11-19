@@ -33,4 +33,6 @@
     <string name="pick_hora">Selecione uma hora</string>
     <string name="timePicker">timePicker</string>
     <string name="update_perfil">Editar Perfil</string>
+    <string name="imagemuser">ImagemUser</string>
+    <string name="data">Data:</string>
 </resources>
