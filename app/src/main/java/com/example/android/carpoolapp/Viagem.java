@@ -2,8 +2,10 @@ package com.example.android.carpoolapp;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
+
 @IgnoreExtraProperties
-public class Viagem {
+public class Viagem implements Serializable {
 
     private String emailUser;
     private String pontoPartida;
@@ -83,5 +85,11 @@ public class Viagem {
 
     public void setComentarios(String comentarios) {
         this.comentarios = comentarios;
+    }
+
+    @Override
+    public String toString() {
+        String retVal = "De: " + this.pontoPartida + "\nPara: " + this.pontoDestino + "\nData e hora: " + this.data + " - " + this.hora;
+        return retVal;
     }
 }

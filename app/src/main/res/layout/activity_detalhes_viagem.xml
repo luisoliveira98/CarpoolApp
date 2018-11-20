@@ -41,7 +41,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textEmail"
+                android:id="@+id/textPontoChegada"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp" />
@@ -71,7 +71,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textNumero"
+                android:id="@+id/textHora"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp" />
@@ -119,7 +119,7 @@
                 android:id="@+id/textComentarios"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="   \24dp"
+                android:layout_marginBottom="24dp"
                 android:textSize="18sp" />
 
 

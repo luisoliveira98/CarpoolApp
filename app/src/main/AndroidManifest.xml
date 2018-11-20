@@ -40,9 +40,6 @@
         </activity>
         <activity android:name=".SignInActivity" />
         <activity
-            android:name=".DetalhesViagem"
-            android:label="Detalhes da Viagem" />
-        <activity
             android:name=".Perfil"
             android:label="Perfil"
             android:parentActivityName=".MainActivity">
@@ -52,16 +49,18 @@
             >
         </activity>
         <activity android:name=".Resultados" />
-        <activity android:name=".UpdatePerfil"
-                android:label="Editar Perfil">
-        </activity>
-        <activity android:name=".Historico"
+        <activity
+            android:name=".UpdatePerfil"
+            android:label="Editar Perfil"></activity>
+        <activity
+            android:name=".Historico"
             android:label="Histórico"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.carpoolapp.MainActivity" />
         </activity>
+        <activity android:name=".DetalhesViagem"></activity>
     </application>
 
 </manifest>

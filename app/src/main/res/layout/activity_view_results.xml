@@ -9,7 +9,7 @@
         android:text="Resultados da pesquisa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tvUserInfo"/>
+        android:id="@+id/textMinhasViagens"/>
 
     <ListView
         android:id="@+id/list_resultado"

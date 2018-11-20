@@ -1,42 +1,41 @@
 package com.example.android.carpoolapp;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.TextView;
 
 public class DetalhesViagem extends AppCompatActivity {
+
+    private TextView textPontoPartida,
+                    textPontoChegada,
+                    textData,
+                    textHora,
+                    textLugares,
+                    textPreco,
+                    textComentarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_viagem);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_detalhe_viagem, menu);
-        return true;
-    }
+        textPontoChegada = findViewById(R.id.textPontoChegada);
+        textPontoPartida = findViewById(R.id.textPontoPartida);
+        textData = findViewById(R.id.textData);
+        textHora = findViewById(R.id.textHora);
+        textLugares = findViewById(R.id.textLugares);
+        textPreco = findViewById(R.id.textPreco);
+        textComentarios = findViewById(R.id.textComentarios);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        Viagem viagem = (Viagem) getIntent().getExtras().getSerializable("viagem");
 
-        //noinspection SimplifiableIfStatement
-        switch (item.getItemId()) {
-            case R.id.action_mostrarMapa:
-                //Mostrar mapa
-            case R.id.action_editar:
-                //Editar Viagem
-            case R.id.action_eliminar:
-                //Eliminar Viagem
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        textPontoPartida.setText(viagem.getPontoPartida());
+        textPontoChegada.setText(viagem.getPontoDestino());
+        textData.setText(viagem.getData());
+        textHora.setText(viagem.getHora());
+        //textLugares.setText(viagem.getLugaresDisponiveis());
+        textPreco.setText(viagem.getPrecoPassageiro() + "");
+        textComentarios.setText(viagem.getComentarios());
+
     }
 }
