@@ -39,6 +39,7 @@ public class Perfil extends AppCompatActivity {
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mFirebaseDatabase;
     private User user;
+    private String keyUser;
 
 
     @Override
@@ -61,6 +62,7 @@ public class Perfil extends AppCompatActivity {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         user = (User) getIntent().getExtras().getSerializable("user");
+        keyUser = (String) getIntent().getExtras().getSerializable("key");
 
 
         textNome.setText(user.getNome());
@@ -93,6 +95,7 @@ public class Perfil extends AppCompatActivity {
             case R.id.action_updatePerfil:
                 Intent intent = new Intent(this, UpdatePerfil.class);
                 intent.putExtra("user", user);
+                intent.putExtra("key", keyUser);
                 startActivity(intent);
                 finish();
                 return true;

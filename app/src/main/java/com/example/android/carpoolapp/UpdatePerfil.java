@@ -9,8 +9,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class UpdatePerfil extends AppCompatActivity {
-    User user;
-    EditText editNome,
+    private User user;
+    private String keyUser;
+    private EditText editNome,
             editTelemovel,
             editCidade,
             editMarcaCarro,
@@ -19,7 +20,7 @@ public class UpdatePerfil extends AppCompatActivity {
             editCorCarro,
             editMatriculaCarro;
 
-    DatabaseReference firebaseDatabase;
+    private DatabaseReference firebaseDatabase;
 
 
     @Override
@@ -28,6 +29,7 @@ public class UpdatePerfil extends AppCompatActivity {
         setContentView(R.layout.activity_update_perfil);
 
         user = (User) getIntent().getExtras().getSerializable("user");
+        keyUser = (String) getIntent().getExtras().getSerializable("key");
 
         firebaseDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -75,7 +77,7 @@ public class UpdatePerfil extends AppCompatActivity {
         user.setTelemovel(telemovel);
         user.setCarro(carro);
 
-        firebaseDatabase.child("users").child(user.getEmail().split("@")[0]).setValue(user);
+        firebaseDatabase.child("users").child(keyUser).setValue(user);
 
         finish();
     }

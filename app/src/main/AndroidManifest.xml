@@ -60,7 +60,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.carpoolapp.MainActivity" />
         </activity>
-        <activity android:name=".DetalhesViagem"></activity>
+        <activity android:name=".DetalhesViagem"
+            android:label="Detalhes da Viagem"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.carpoolapp.MainActivity" />
+            ></activity>
     </application>
 
 </manifest>

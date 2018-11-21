@@ -40,8 +40,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnConnectionFailedListener {
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mFirebaseDatabase;
     private String mUsername;
-    private String userMail;//primeira parte do email
+    private String keyUser;//primeira parte do email
     public static final String ANONYMOUS = "anonymous";
     private static final String TAG = "MainActivity";
     private GoogleApiClient mGoogleApiClient;
@@ -88,7 +90,6 @@ public class MainActivity extends AppCompatActivity
             return;
         } else {
             mUsername = mFirebaseUser.getDisplayName();
-            userMail = mFirebaseUser.getEmail().split("@")[0];
         }
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -98,11 +99,18 @@ public class MainActivity extends AppCompatActivity
 
         mFirebaseDatabase = FirebaseDatabase.getInstance().getReference();
         user = new User();
-        Query query = mFirebaseDatabase.child("users").child(userMail);
+        Query query = mFirebaseDatabase.child("users");
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                user = dataSnapshot.getValue(User.class);
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    User temp = data.getValue(User.class);
+                    if (temp.getEmail().equals(mFirebaseUser.getEmail()))
+                        user = temp;
+                        keyUser = data.getKey();
+                        break;
+                }
+
                 //mProgressBar.setVisibility(ProgressBar.INVISIBLE);
                 if(!user.complete()) {
                     AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity.this);
@@ -116,6 +124,7 @@ public class MainActivity extends AppCompatActivity
                                 public void onClick(DialogInterface dialog, int which) {
                                     Intent intent = new Intent(MainActivity.this, UpdatePerfil.class);
                                     intent.putExtra("user", user);
+                                    intent.putExtra("key", keyUser);
                                     startActivity(intent);
                                 }
                             })
@@ -130,6 +139,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        final Map<Viagem, String> keys = new HashMap<>();
         final List<Viagem> viagens = new LinkedList<>();
         final ArrayAdapter<Viagem> arrayAdapter = new ArrayAdapter<Viagem>(this, android.R.layout.simple_list_item_1, viagens){
             @Override
@@ -149,6 +159,7 @@ public class MainActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, DetalhesViagem.class);
                 intent.putExtra("viagem", viagens.get(position));
+                intent.putExtra("key", keys.get(viagens.get(position)));
                 startActivity(intent);
             }
         });
@@ -158,8 +169,11 @@ public class MainActivity extends AppCompatActivity
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 //System.out.println(dataSnapshot.getKey());
                 Viagem viagem = dataSnapshot.getValue(Viagem.class);
-                viagens.add(viagem);
-                arrayAdapter.notifyDataSetChanged();
+                if (viagem.getEmailUser() != mFirebaseUser.getEmail()) {
+                    viagens.add(viagem);
+                    keys.put(viagem, dataSnapshot.getKey());
+                    arrayAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -242,6 +256,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_perfil) {
             intent = new Intent(this, Perfil.class);
             intent.putExtra("user", user);
+            intent.putExtra("key", keyUser);
             startActivity(intent);
         }
 
