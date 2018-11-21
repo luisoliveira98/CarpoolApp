@@ -79,6 +79,7 @@ public class DetalhesViagem extends AppCompatActivity {
 
             case R.id.action_eliminar:
                 mFirebaseDatabase.child("viagens").child(keyViagem).removeValue();
+                finish();
                 return true;
 
             default:

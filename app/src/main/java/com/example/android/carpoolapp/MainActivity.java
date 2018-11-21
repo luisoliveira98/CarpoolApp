@@ -105,10 +105,11 @@ public class MainActivity extends AppCompatActivity
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     User temp = data.getValue(User.class);
-                    if (temp.getEmail().equals(mFirebaseUser.getEmail()))
+                    if (temp.getEmail().equals(mFirebaseUser.getEmail())) {
                         user = temp;
                         keyUser = data.getKey();
                         break;
+                    }
                 }
 
                 //mProgressBar.setVisibility(ProgressBar.INVISIBLE);
@@ -169,7 +170,7 @@ public class MainActivity extends AppCompatActivity
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 //System.out.println(dataSnapshot.getKey());
                 Viagem viagem = dataSnapshot.getValue(Viagem.class);
-                if (viagem.getEmailUser() != mFirebaseUser.getEmail()) {
+                if (viagem.getEmailUser().equals(mFirebaseUser.getEmail())) {
                     viagens.add(viagem);
                     keys.put(viagem, dataSnapshot.getKey());
                     arrayAdapter.notifyDataSetChanged();

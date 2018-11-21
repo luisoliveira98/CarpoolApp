@@ -61,7 +61,7 @@ public class PublicarViagem extends AppCompatActivity {
         viagem.setPontoPartida(partida.getText().toString());
         viagem.setPontoDestino(destino.getText().toString());
         viagem.setData(data.getText().toString());
-        viagem.setHora(showtime.toString());
+        viagem.setHora(showtime.getText().toString());
         viagem.setLugaresDisponiveis(Integer.parseInt(lugares.getText().toString()));
         viagem.setPrecoPassageiro(Double.parseDouble(preco.getText().toString()));
         viagem.setComentarios(comentarios.getText().toString());
