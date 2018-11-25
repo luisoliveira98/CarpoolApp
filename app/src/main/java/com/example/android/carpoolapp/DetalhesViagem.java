@@ -77,14 +77,17 @@ public class DetalhesViagem extends AppCompatActivity {
                 startActivity(intent);
 
             case R.id.action_mostrarMapa:
-                /*Intent i = new Intent(DetalhesViagem.this, PathViagem.class);
-                startActivity(i);*/
+                Intent i = new Intent(DetalhesViagem.this, PathViagem.class);
+                i.putExtra("viagem", viagem);
+                i.putExtra("key", keyViagem);
+                startActivity(i);
                 return true;
 
             case R.id.action_editar:
                 mFirebaseDatabase.child("viagens").child(keyViagem).removeValue();
                 intent = new Intent(DetalhesViagem.this, PublicarViagem.class);
                 intent.putExtra("viagem", viagem);
+                intent.putExtra("key", keyViagem);
                 startActivity(intent);
                 return true;
 
