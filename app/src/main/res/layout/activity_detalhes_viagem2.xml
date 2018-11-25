@@ -128,7 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="reservarViagem"
-                android:text="@string/btn_reservar"
+                android:text="Reservar"
                 tools:layout_editor_absoluteX="148dp"
                 tools:layout_editor_absoluteY="463dp" />
 

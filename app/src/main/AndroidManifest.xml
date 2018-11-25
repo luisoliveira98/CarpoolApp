@@ -67,6 +67,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.carpoolapp.MainActivity" />
             ></activity>
+        <activity android:name=".PartilharViagem" />
+        <activity android:name=".DetalhesViagem2"></activity>
     </application>
 
 </manifest>

@@ -20,7 +20,7 @@ public class PosTracking extends FragmentActivity implements OnMapReadyCallback 
         setContentView(R.layout.activity_pos_tracking);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.map2);
         mapFragment.getMapAsync(this);
     }
 
