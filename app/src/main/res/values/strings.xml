@@ -35,4 +35,5 @@
     <string name="update_perfil">Editar Perfil</string>
     <string name="imagemuser">ImagemUser</string>
     <string name="data">Data:</string>
+    <string name="title_activity_pos_tracking">Map</string>
 </resources>

@@ -17,7 +17,7 @@ public class Viagem implements Serializable {
     private String comentarios;
 
     public Viagem() {
-
+        emailUser="";
     }
 
     /*

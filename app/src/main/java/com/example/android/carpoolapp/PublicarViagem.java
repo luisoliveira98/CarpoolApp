@@ -46,13 +46,26 @@ public class PublicarViagem extends AppCompatActivity {
         comentarios = findViewById(R.id.inputComentario);
         publicar = findViewById(R.id.buttonPublicar);
 
-        viagem = new Viagem();
+        viagem = (Viagem) getIntent().getExtras().getSerializable("viagem");
+
+        if(!viagem.getEmailUser().equals(""))
+            mostrarDetalhes();
 
         //FirebaseUser
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         //FirebaseDatabase
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+    }
+
+    private void mostrarDetalhes() {
+        partida.setText(viagem.getPontoPartida());
+        destino.setText(viagem.getPontoDestino());
+        data.setText(viagem.getData());
+        showtime.setText(viagem.getHora());
+        lugares.setText(viagem.getLugaresDisponiveis()+"");
+        preco.setText(viagem.getPrecoPassageiro()+"");
+        comentarios.setText(viagem.getComentarios());
     }
 
     public void publicar(View view) {

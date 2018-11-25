@@ -247,6 +247,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_publicar) {
             intent = new Intent(this, PublicarViagem.class);
+            intent.putExtra("viagem", new Viagem());
             startActivity(intent);
         } else if (id == R.id.nav_procurar) {
             intent = new Intent(this, ProcurarViagem.class);
