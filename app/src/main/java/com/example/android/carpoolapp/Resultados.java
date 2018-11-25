@@ -1,10 +1,15 @@
 package com.example.android.carpoolapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -12,6 +17,7 @@ import android.widget.TextView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,95 +26,97 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class Resultados extends AppCompatActivity {
 
     private DatabaseReference mRef;
-    private ListView mList;
-    private List<Viagem> vList = new ArrayList<Viagem>();
-    private ArrayAdapter<Viagem> arrayAdapter;
+    private ListView vlist;
+    private FirebaseUser mFireBaseUser;
+    private FirebaseAuth mFireBaseAuth;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_results);
+        Intent intent = getIntent();
+        final String pPartida = intent.getStringExtra(ProcurarViagem.PARTIDA_MESSAGE);
+        final String pDestino = intent.getStringExtra(ProcurarViagem.DESTINO_MESSAGE);
+        final String pHora = intent.getStringExtra(ProcurarViagem.HORA_MESSAGE);
+        final String pData = intent.getStringExtra(ProcurarViagem.DATA_MESSAGE);
 
+        vlist = (ListView) findViewById(R.id.list_resultado);
+        mFireBaseAuth = FirebaseAuth.getInstance();
         mRef = FirebaseDatabase.getInstance().getReference().child("viagens");
-        mList = (ListView) findViewById(R.id.list_resultado);
+        mFireBaseUser = mFireBaseAuth.getCurrentUser();
 
-        mRef.addValueEventListener(new ValueEventListener() {
+        final Map<Viagem, String> keys = new HashMap<>();
+        final List<Viagem> viagens = new LinkedList<>();
+        final ArrayAdapter<Viagem> arrayAdapter = new ArrayAdapter<Viagem>(this, android.R.layout.simple_list_item_1, viagens){
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
-                Viagem v = dataSnapshot1.getValue(Viagem.class);
-                vList.add(v);
+            public View getView(int position, View view, ViewGroup parent){
+                if (view == null) {
+                    view = getLayoutInflater().inflate(android.R.layout.two_line_list_item, parent, false);
                 }
-
-                arrayAdapter = new ArrayAdapter<Viagem>(Resultados.this, android.R.layout.simple_list_item_1, vList);
-                mList.setAdapter(arrayAdapter);
-
+                Viagem v = viagens.get(position);
+                ((TextView) view.findViewById(android.R.id.text1)).setText(v.toString());
+                return view;
             }
+        };
+        vlist.setAdapter(arrayAdapter);
+        vlist.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(Resultados.this, DetalhesViagem2.class);
+                intent.putExtra("viagem", viagens.get(position));
+                intent.putExtra("key", keys.get(viagens.get(position)));
+                startActivity(intent);
             }
         });
-    }
 
-    /*    private FirebaseDatabase mFirebaseDatabase;
-    private FirebaseAuth mFirebaseAuth;
-    private FirebaseUser mFirebaseUser;
-    private DatabaseReference mViagemReference;
-    private String mViagemKey;
-
-    private ListView mListView;
-
-
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_results);
-
-        mListView = (ListView) findViewById(R.id.listview);
-
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mViagemReference = mFirebaseDatabase.getReference().child("viagens");
-        //FirebaseUser user = mFirebaseAuth.getCurrentUser();
-
-        mViagemReference.addValueEventListener(new ValueEventListener() {
+        Query query = mRef;
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                showViagens(dataSnapshot);
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Viagem viagem = data.getValue(Viagem.class);
+                    if (viagem.getPontoPartida().equals(pPartida) && viagem.getPontoDestino().equals(pDestino)) {
+                        if (pData.equals("")){
+                            if (pHora.equals("")) {
+                                viagens.add(viagem);
+                                keys.put(viagem, dataSnapshot.getKey());
+                                arrayAdapter.notifyDataSetChanged();
+                            }
+                            else if (pHora.equals(viagem.getHora())){
+                                viagens.add(viagem);
+                                keys.put(viagem, dataSnapshot.getKey());
+                                arrayAdapter.notifyDataSetChanged();
+                            }
+                        }
+                        else if (pData.equals(viagem.getData())) {
+                            if (pHora.equals("")) {
+                                viagens.add(viagem);
+                                keys.put(viagem, dataSnapshot.getKey());
+                                arrayAdapter.notifyDataSetChanged();
+                            } else if (pHora.equals(viagem.getHora())) {
+                                viagens.add(viagem);
+                                keys.put(viagem, dataSnapshot.getKey());
+                                arrayAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    }
+                }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
-
     }
 
-    private void showViagens(DataSnapshot dataSnapshot) {
-        for (DataSnapshot ds: dataSnapshot.getChildren()){
-            Viagem v = new Viagem();
-            v.setPontoPartida(ds.child(mViagemKey).getValue(Viagem.class).getPontoPartida());
-            v.setPontoDestino(ds.child(mViagemKey).getValue(Viagem.class).getPontoDestino());
-            v.setData(ds.child(mViagemKey).getValue(Viagem.class).getData());
-            v.setHora(ds.child(mViagemKey).getValue(Viagem.class).getHora());
-
-            ArrayList<String> array = new ArrayList<>();
-            array.add(v.getPontoDestino());
-            array.add(v.getPontoDestino());
-            array.add(v.getData());
-            array.add(v.getHora());
-            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, array);
-            mListView.setAdapter(adapter);
-        }
-    }
-*/
 }
