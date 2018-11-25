@@ -1,15 +1,23 @@
 package com.example.android.carpoolapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class DetalhesViagem extends AppCompatActivity {
 
@@ -20,10 +28,13 @@ public class DetalhesViagem extends AppCompatActivity {
                     textLugares,
                     textPreco,
                     textComentarios;
+    private Button updateStateViagem;
 
     private String keyViagem;
     private Viagem viagem;
     private DatabaseReference mFirebaseDatabase;
+    private String buttonComecar = "Começar viagem";
+    private String buttonTerminar = "Terminar viagem";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +48,7 @@ public class DetalhesViagem extends AppCompatActivity {
         textLugares = findViewById(R.id.textLugaresViagem);
         textPreco = findViewById(R.id.textPrecoViagem);
         textComentarios = findViewById(R.id.textComentarios);
+        updateStateViagem = findViewById(R.id.buttonUpdateState);
 
         viagem = (Viagem) getIntent().getExtras().getSerializable("viagem");
         keyViagem = (String) getIntent().getExtras().getSerializable("key");
@@ -48,9 +60,34 @@ public class DetalhesViagem extends AppCompatActivity {
         textHora.setText(viagem.getHora());
         textLugares.setText(viagem.getLugaresDisponiveis() + "");
         textPreco.setText(viagem.getPrecoPassageiro() + "€");
+
         if (!viagem.getComentarios().equals(""))
             textComentarios.setText(viagem.getComentarios());
 
+        if (viagem.getEstado() == Viagem.State.CREATED) {
+            updateStateViagem.setText(buttonComecar);
+        }
+
+        if (viagem.getEstado() == Viagem.State.STARTED) {
+            updateStateViagem.setText(buttonTerminar);
+        }
+
+        if (viagem.getEstado() == Viagem.State.FINISHED) {
+            updateStateViagem.setVisibility(View.INVISIBLE);
+        }
+
+    }
+
+    public void updateState(View view) {
+        if (viagem.getEstado() == Viagem.State.CREATED) {
+            viagem.setEstado(Viagem.State.STARTED);
+            mFirebaseDatabase.child("viagens").child(keyViagem).setValue(viagem);
+        }
+
+        else if (viagem.getEstado() == Viagem.State.STARTED) {
+            viagem.setEstado(Viagem.State.FINISHED);
+            mFirebaseDatabase.child("viagens").child(keyViagem).setValue(viagem);
+        }
     }
 
     @Override

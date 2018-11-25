@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity
     private GoogleApiClient mGoogleApiClient;
     private User user;
     private ListView lv;
-    //private ProgressBar mProgressBar;
+    private ProgressBar mProgressBar;
 
 
     @Override
@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         lv = findViewById(R.id.vl);
-        //mProgressBar = findViewById(R.id.progressBar);
-        //mProgressBar.setVisibility(ProgressBar.VISIBLE);
+        mProgressBar = findViewById(R.id.progressBar);
+        mProgressBar.setVisibility(ProgressBar.VISIBLE);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity
                     }
                 }
 
-                //mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+                mProgressBar.setVisibility(ProgressBar.INVISIBLE);
                 if(!user.complete()) {
                     AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity.this);
                     alerta.setTitle("Aviso");

@@ -1,11 +1,14 @@
 package com.example.android.carpoolapp;
 
-import com.google.firebase.database.IgnoreExtraProperties;
-
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
-@IgnoreExtraProperties
 public class Viagem implements Serializable {
+
+    public enum State {
+        CREATED, STARTED, FINISHED
+    }
 
     private String emailUser;
     private String pontoPartida;
@@ -15,9 +18,13 @@ public class Viagem implements Serializable {
     private int lugaresDisponiveis;
     private double precoPassageiro;
     private String comentarios;
+    private State estado;
+    private Map<String, Integer> reservas;
 
     public Viagem() {
         emailUser="";
+        estado = State.CREATED;
+        reservas = new HashMap<>();
     }
 
     /*
@@ -87,9 +94,25 @@ public class Viagem implements Serializable {
         this.comentarios = comentarios;
     }
 
+    public State getEstado() {
+        return estado;
+    }
+
+    public void setEstado(State estado) {
+        this.estado = estado;
+    }
+
+    public Map<String, Integer> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(Map<String, Integer> reservas) {
+        this.reservas = reservas;
+    }
+
     @Override
     public String toString() {
-        String retVal = "De: " + this.pontoPartida + "\nPara: " + this.pontoDestino + "\nData e hora: " + this.data + " - " + this.hora;
+        String retVal = "De: " + this.pontoPartida + "\nPara: " + this.pontoDestino + "\nData e hora: " + this.data + " - " + this.hora + "\nEstado: " + this.estado;
         return retVal;
     }
 }
