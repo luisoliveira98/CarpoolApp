@@ -94,8 +94,6 @@ public class ProcurarViagem extends AppCompatActivity {
                         Viagem viagem = dataSnapshot.getValue(Viagem.class);
                         intent.putExtra("viagem", viagem);
                         intent.putExtra("key", result.getContents());
-                        System.out.println("AQUIIIIIIIII" + result.getContents());
-                        System.out.println("AQUIIIIIIIII" + viagem.toString());
                         startActivity(intent);
                     }
 
