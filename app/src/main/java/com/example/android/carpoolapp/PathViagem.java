@@ -89,7 +89,7 @@ public class PathViagem extends AppCompatActivity implements OnMapReadyCallback,
             sb.append("https://maps.googleapis.com/maps/api/directions/json?");
             sb.append("origin=" + paddress.getLatitude() + "," + paddress.getLongitude());
             sb.append("&destination=" + daddress.getLatitude() + "," + daddress.getLongitude());
-            sb.append("&key=" + "AIzaSyBcZW6OdMwyupqff3yMSSWgwRkb39NL-BA");
+            sb.append("&key=" + "AIzaSyBTzxbpr_Nt7MMc45BoWkkw_qKQAMyYubg");
 
             getDirectionsData = new GetDirectionsData(getApplicationContext());
             dataTransfer[0]=mMap;
