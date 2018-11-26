@@ -1,5 +1,6 @@
 package com.example.android.carpoolapp;
 
+import android.content.Context;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -69,7 +70,7 @@ public class PathViagem extends AppCompatActivity implements OnMapReadyCallback,
             MarkerOptions options = new MarkerOptions();
             MarkerOptions options1 = new MarkerOptions();
             options.title(plocality);
-            options1.title(plocality);
+            options1.title(dlocality);
             options.draggable(false);
             options1.draggable(false);
             options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
@@ -81,13 +82,14 @@ public class PathViagem extends AppCompatActivity implements OnMapReadyCallback,
             p = mMap.addMarker(options);
             d = mMap.addMarker(options1);
 
-            //Criteria criteria = new Criteria();
+            Criteria criteria = new Criteria();
             sb = new StringBuilder();
-            //String provider = locationManager.getBestProvider(criteria, true);
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            String provider = locationManager.getBestProvider(criteria, true);
             sb.append("https://maps.googleapis.com/maps/api/directions/json?");
             sb.append("origin=" + paddress.getLatitude() + "," + paddress.getLongitude());
             sb.append("&destination=" + daddress.getLatitude() + "," + daddress.getLongitude());
-            sb.append("&key=" + "AIzaSyCV0dWVE669D1rCtB7N4tgtI4LN1nI_V1s");
+            sb.append("&key=" + "AIzaSyBcZW6OdMwyupqff3yMSSWgwRkb39NL-BA");
 
             getDirectionsData = new GetDirectionsData(getApplicationContext());
             dataTransfer[0]=mMap;
