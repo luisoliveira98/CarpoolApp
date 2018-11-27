@@ -7,7 +7,7 @@ import java.util.Map;
 public class Viagem implements Serializable {
 
     public enum State {
-        CREATED, STARTED, FINISHED
+        CREATED, STARTED, FULL, FINISHED
     }
 
     private String emailUser;

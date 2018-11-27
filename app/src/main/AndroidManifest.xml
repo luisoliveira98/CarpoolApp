@@ -42,22 +42,29 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.carpoolapp.MainActivity" />
-            >
         </activity>
         <activity android:name=".SignInActivity" />
-        <activity
-            android:name=".Perfil"
+        <activity android:name=".Perfil"
             android:label="Perfil"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.carpoolapp.MainActivity" />
-            >
         </activity>
-        <activity android:name=".Resultados" />
-        <activity
-            android:name=".UpdatePerfil"
-            android:label="Editar Perfil" />
+        <activity android:name=".Resultados"
+            android:label="Resultados"
+            android:parentActivityName=".ProcurarViagem">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.carpoolapp.ProcurarViagem"/>
+        </activity>
+        <activity android:name=".UpdatePerfil"
+            android:label="Editar Perfil"
+            android:parentActivityName=".Perfil">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.carpoolapp.Perfil"/>
+        </activity>
         <activity
             android:name=".Historico"
             android:label="Histórico"
@@ -74,19 +81,28 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.carpoolapp.MainActivity" />
         </activity>
-        <activity android:name=".PartilharViagem" />
-        <activity android:name=".DetalhesViagem2" />
-        <activity android:name=".PathViagem" />
-        <activity android:name=".ReservarViagem"></activity>
-        <activity
-            android:name=".PartilharLocalizacao"
+        <activity android:name=".PartilharViagem"
+            android:label="Partilhar Viagem">
+        </activity>
+        <activity android:name=".DetalhesViagem2"
+            android:label="Detalhes da Viagem">
+        </activity>
+        <activity android:name=".PathViagem"
+            android:label="Percurso da Viagem">
+        </activity>
+        <activity android:name=".ReservarViagem"
+            android:label="Reservar Viagem">
+        </activity>
+        <activity android:name=".PartilharLocalizacao"
             android:label="Partilhar Localização"
             android:parentActivityName=".MainActivity"/>
-        <activity
-            android:name=".PosTracking2"
+        <activity android:name=".PosTracking2"
             android:label="Seguir localizção de Utilizador"
             android:parentActivityName=".MainActivity">
         </activity>
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
     </application>
 
 </manifest>

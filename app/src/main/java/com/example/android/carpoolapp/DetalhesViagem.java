@@ -112,6 +112,7 @@ public class DetalhesViagem extends AppCompatActivity {
                 intent = new Intent(DetalhesViagem.this, PartilharViagem.class);
                 intent.putExtra("key", keyViagem);
                 startActivity(intent);
+                return true;
 
             case R.id.action_mostrarMapa:
                 Intent i = new Intent(DetalhesViagem.this, PathViagem.class);

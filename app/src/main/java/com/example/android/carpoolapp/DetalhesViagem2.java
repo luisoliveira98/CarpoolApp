@@ -48,7 +48,6 @@ public class DetalhesViagem2 extends AppCompatActivity {
 
         viagem = (Viagem) getIntent().getExtras().getSerializable("viagem");
         keyViagem = (String) getIntent().getExtras().getSerializable("key");
-        System.out.println("OLOLALALLALALALALALLALALALLA: " + keyViagem);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
@@ -68,7 +67,6 @@ public class DetalhesViagem2 extends AppCompatActivity {
         Intent intent = new Intent(DetalhesViagem2.this, ReservarViagem.class);
         intent.putExtra("viagem", viagem);
         intent.putExtra("key", keyViagem);
-        System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkk: " + keyViagem);
         startActivity(intent);
     }
 

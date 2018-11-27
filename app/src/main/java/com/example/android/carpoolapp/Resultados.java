@@ -76,8 +76,6 @@ public class Resultados extends AppCompatActivity {
                 Intent intent = new Intent(Resultados.this, DetalhesViagem2.class);
                 intent.putExtra("viagem", viagens.get(position));
                 intent.putExtra("key", keys.get(viagens.get(position)));
-                System.out.println(keys);
-                System.out.println("AQUIIIIIIIIIIIIIIII: " + keys.get(viagens.get(position)));
                 startActivity(intent);
             }
         });
@@ -88,7 +86,7 @@ public class Resultados extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Viagem viagem = data.getValue(Viagem.class);
-                    if (viagem.getPontoPartida().equals(pPartida) && viagem.getPontoDestino().equals(pDestino)) {
+                    if (viagem.getPontoPartida().equals(pPartida) && viagem.getPontoDestino().equals(pDestino) && viagem.getEstado().equals(Viagem.State.CREATED)) {
                         if (pData.equals("")){
                             if (pHora.equals("")) {
                                 viagens.add(viagem);

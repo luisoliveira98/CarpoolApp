@@ -72,11 +72,12 @@ public class ReservarViagem extends AppCompatActivity {
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
                                 reservas.put(uid, n);
                                 viagem.setLugaresDisponiveis(viagem.getLugaresDisponiveis() - n);
+                                if (viagem.getLugaresDisponiveis()==0){
+                                    viagem.setEstado(Viagem.State.FULL);
+                                }
                                 viagem.setReservas(reservas);
-                                System.out.println("AQUIIIIIIIIIIIIIIIIIIIII " + keyViagem);
                                 mFirebaseDatabase.child(keyViagem).setValue(viagem);
                                 Toast.makeText(ReservarViagem.this, "Viagem Reservada!", Toast.LENGTH_LONG).show();
                                 finish();
@@ -85,7 +86,7 @@ public class ReservarViagem extends AppCompatActivity {
                     .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            finish();
+                            return;
                         }
                     });
 
