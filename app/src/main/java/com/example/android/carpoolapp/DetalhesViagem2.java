@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +31,8 @@ public class DetalhesViagem2 extends AppCompatActivity {
     private String keyViagem;
     private Viagem viagem;
     private DatabaseReference mFirebaseDatabase;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,10 @@ public class DetalhesViagem2 extends AppCompatActivity {
 
         viagem = (Viagem) getIntent().getExtras().getSerializable("viagem");
         keyViagem = (String) getIntent().getExtras().getSerializable("key");
+        System.out.println("OLOLALALLALALALALALLALALALLA: " + keyViagem);
 
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
         mFirebaseDatabase = FirebaseDatabase.getInstance().getReference().child("viagens");
 
         textPontoPartida.setText(viagem.getPontoPartida());
@@ -59,5 +65,17 @@ public class DetalhesViagem2 extends AppCompatActivity {
     }
 
     public void reservarViagem(View view) {
+        Intent intent = new Intent(DetalhesViagem2.this, ReservarViagem.class);
+        intent.putExtra("viagem", viagem);
+        intent.putExtra("key", keyViagem);
+        System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkk: " + keyViagem);
+        startActivity(intent);
+    }
+
+    public void showPath(View view) {
+        Intent i = new Intent(DetalhesViagem2.this, PathViagem.class);
+        i.putExtra("viagem", viagem);
+        i.putExtra("key", keyViagem);
+        startActivity(i);
     }
 }

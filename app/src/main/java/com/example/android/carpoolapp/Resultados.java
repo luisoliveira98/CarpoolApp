@@ -76,6 +76,8 @@ public class Resultados extends AppCompatActivity {
                 Intent intent = new Intent(Resultados.this, DetalhesViagem2.class);
                 intent.putExtra("viagem", viagens.get(position));
                 intent.putExtra("key", keys.get(viagens.get(position)));
+                System.out.println(keys);
+                System.out.println("AQUIIIIIIIIIIIIIIII: " + keys.get(viagens.get(position)));
                 startActivity(intent);
             }
         });
@@ -90,23 +92,23 @@ public class Resultados extends AppCompatActivity {
                         if (pData.equals("")){
                             if (pHora.equals("")) {
                                 viagens.add(viagem);
-                                keys.put(viagem, dataSnapshot.getKey());
+                                keys.put(viagem, data.getKey());
                                 arrayAdapter.notifyDataSetChanged();
                             }
                             else if (pHora.equals(viagem.getHora())){
                                 viagens.add(viagem);
-                                keys.put(viagem, dataSnapshot.getKey());
+                                keys.put(viagem, data.getKey());
                                 arrayAdapter.notifyDataSetChanged();
                             }
                         }
                         else if (pData.equals(viagem.getData())) {
                             if (pHora.equals("")) {
                                 viagens.add(viagem);
-                                keys.put(viagem, dataSnapshot.getKey());
+                                keys.put(viagem, data.getKey());
                                 arrayAdapter.notifyDataSetChanged();
                             } else if (pHora.equals(viagem.getHora())) {
                                 viagens.add(viagem);
-                                keys.put(viagem, dataSnapshot.getKey());
+                                keys.put(viagem, data.getKey());
                                 arrayAdapter.notifyDataSetChanged();
                             }
                         }
