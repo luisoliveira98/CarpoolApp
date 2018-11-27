@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.carpoolapp">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBTzxbpr_Nt7MMc45BoWkkw_qKQAMyYubg" />
+            android:value="KEY HERE" />
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -72,11 +73,20 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.carpoolapp.MainActivity" />
-            >
         </activity>
         <activity android:name=".PartilharViagem" />
         <activity android:name=".DetalhesViagem2" />
-        <activity android:name=".PathViagem"></activity>
+        <activity android:name=".PathViagem" />
+        <activity android:name=".ReservarViagem"></activity>
+        <activity
+            android:name=".PartilharLocalizacao"
+            android:label="Partilhar Localização"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".PosTracking2"
+            android:label="Seguir localizção de Utilizador"
+            android:parentActivityName=".MainActivity">
+        </activity>
     </application>
 
 </manifest>

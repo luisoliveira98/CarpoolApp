@@ -252,7 +252,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_procurar) {
             intent = new Intent(this, ProcurarViagem.class);
             startActivity(intent);
-        }  else if (id == R.id.nav_historico) {
+        } else if (id == R.id.nav_localizacao) {
+            intent = new Intent(this, PartilharLocalizacao.class);
+            startActivity(intent);
+        }else if (id == R.id.nav_historico) {
             intent = new Intent(this, Historico.class);
             startActivity(intent);
         } else if (id == R.id.nav_perfil) {
