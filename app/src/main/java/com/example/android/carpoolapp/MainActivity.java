@@ -140,6 +140,13 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
         final Map<Viagem, String> keys = new HashMap<>();
         final List<Viagem> viagens = new LinkedList<>();
         final ArrayAdapter<Viagem> arrayAdapter = new ArrayAdapter<Viagem>(this, android.R.layout.simple_list_item_1, viagens){
@@ -185,6 +192,15 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
 
+                System.out.print("AQUIIII");
+
+                Viagem viagem = dataSnapshot.getValue(Viagem.class);
+
+                if (viagens.contains(viagem)) {
+                    ((LinkedList<Viagem>) viagens).remove(viagem);
+                    keys.remove(viagem);
+                    arrayAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -254,6 +270,9 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_localizacao) {
             intent = new Intent(this, PartilharLocalizacao.class);
+            startActivity(intent);
+        } else if(id == R.id.nav_tracking) {
+            intent = new Intent(this, PosTracking2.class);
             startActivity(intent);
         }else if (id == R.id.nav_historico) {
             intent = new Intent(this, Historico.class);

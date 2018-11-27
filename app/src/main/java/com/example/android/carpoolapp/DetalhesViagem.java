@@ -82,11 +82,13 @@ public class DetalhesViagem extends AppCompatActivity {
         if (viagem.getEstado() == Viagem.State.CREATED) {
             viagem.setEstado(Viagem.State.STARTED);
             mFirebaseDatabase.child("viagens").child(keyViagem).setValue(viagem);
+            finish();
         }
 
         else if (viagem.getEstado() == Viagem.State.STARTED) {
             viagem.setEstado(Viagem.State.FINISHED);
             mFirebaseDatabase.child("viagens").child(keyViagem).setValue(viagem);
+            finish();
         }
     }
 
