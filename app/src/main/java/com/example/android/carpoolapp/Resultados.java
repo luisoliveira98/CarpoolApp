@@ -86,6 +86,13 @@ public class Resultados extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Viagem viagem = data.getValue(Viagem.class);
+                    String[] vdat = viagem.getData().split("/");
+                    String[] vh = viagem.getHora().split(":");
+                    Integer ano = Integer.parseInt(vdat[2]);
+                    Integer mes = Integer.parseInt(vdat[1]);
+                    Integer dia = Integer.parseInt(vdat[0]);
+                    Integer hora = Integer.parseInt(vh[0]);
+                    Integer min = Integer.parseInt(vh[1]);
                     if (viagem.getPontoPartida().equals(pPartida) && viagem.getPontoDestino().equals(pDestino) && viagem.getEstado().equals(Viagem.State.CREATED)) {
                         if (pData.equals("")){
                             if (pHora.equals("")) {
@@ -93,21 +100,36 @@ public class Resultados extends AppCompatActivity {
                                 keys.put(viagem, data.getKey());
                                 arrayAdapter.notifyDataSetChanged();
                             }
-                            else if (pHora.equals(viagem.getHora())){
-                                viagens.add(viagem);
-                                keys.put(viagem, data.getKey());
-                                arrayAdapter.notifyDataSetChanged();
+                            else if (!pHora.equals("")){
+                                Integer ph = Integer.parseInt(pHora.split(":")[0]);
+                                Integer pmin = Integer.parseInt(pHora.split(":")[1]);
+                                if (hora>ph || (hora.equals(ph) && min>=pmin)) {
+                                    viagens.add(viagem);
+                                    keys.put(viagem, data.getKey());
+                                    arrayAdapter.notifyDataSetChanged();
+                                }
                             }
                         }
-                        else if (pData.equals(viagem.getData())) {
+                        else if (!pData.equals("")) {
+                            Integer pano = Integer.parseInt(pData.split("/")[2]);
+                            Integer pmes = Integer.parseInt(pData.split("/")[1]);
+                            Integer pdia = Integer.parseInt(pData.split("/")[0]);
                             if (pHora.equals("")) {
-                                viagens.add(viagem);
-                                keys.put(viagem, data.getKey());
-                                arrayAdapter.notifyDataSetChanged();
-                            } else if (pHora.equals(viagem.getHora())) {
-                                viagens.add(viagem);
-                                keys.put(viagem, data.getKey());
-                                arrayAdapter.notifyDataSetChanged();
+                                if ((ano>pano) || (ano.equals(pano) && mes>=pmes) || (ano.equals(pano) && mes.equals(pmes) && dia>=pdia)) {
+                                    viagens.add(viagem);
+                                    keys.put(viagem, data.getKey());
+                                    arrayAdapter.notifyDataSetChanged();
+                                }
+                            } else if (!pHora.equals("")) {
+                                Integer ph = Integer.parseInt(pHora.split(":")[0]);
+                                Integer pmin = Integer.parseInt(pHora.split(":")[1]);
+                                if ((ano>pano) || (ano.equals(pano) && mes>=pmes) || (ano.equals(pano) && mes.equals(pmes) && dia>=pdia)){
+                                    if (hora>ph || (hora.equals(ph) && min>=pmin)) {
+                                        viagens.add(viagem);
+                                        keys.put(viagem, data.getKey());
+                                        arrayAdapter.notifyDataSetChanged();
+                                    }
+                                }
                             }
                         }
                     }
