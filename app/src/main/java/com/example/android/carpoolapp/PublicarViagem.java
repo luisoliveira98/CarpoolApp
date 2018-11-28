@@ -78,6 +78,7 @@ public class PublicarViagem extends AppCompatActivity {
         viagem.setLugaresDisponiveis(Integer.parseInt(lugares.getText().toString()));
         viagem.setPrecoPassageiro(Double.parseDouble(preco.getText().toString()));
         viagem.setComentarios(comentarios.getText().toString());
+        viagem.setEstado(Viagem.State.CREATED);
 
         AlertDialog.Builder alerta = new AlertDialog.Builder(PublicarViagem.this);
         alerta.setTitle("Aviso");
