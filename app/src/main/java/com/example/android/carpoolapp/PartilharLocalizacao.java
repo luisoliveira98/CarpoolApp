@@ -211,7 +211,7 @@ public class PartilharLocalizacao extends AppCompatActivity implements LocationL
     @Override
     public void onLocationChanged(Location location) {
         ViagemLocalizacao viagemLocalizacao = new ViagemLocalizacao(location.getLongitude(), location.getLatitude(), String.valueOf(new Date().getTime()));
-        mFirebaseDatabaseRef.child("location").child(mFirebaseUser.getProviderId()).setValue(viagemLocalizacao);
+        mFirebaseDatabaseRef.child("location").child(mFirebaseUser.getUid()).setValue(viagemLocalizacao);
         Toast.makeText(this, "Localizaçao atualizada", Toast.LENGTH_SHORT).show();
     }
 
