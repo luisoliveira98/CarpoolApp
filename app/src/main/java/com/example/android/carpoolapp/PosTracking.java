@@ -100,7 +100,7 @@ public class PosTracking extends FragmentActivity implements OnMapReadyCallback 
 
         currentLocationMaker = mMap.addMarker(markerOptions);
 
-        CameraPosition cameraPosition = new CameraPosition.Builder().zoom(15).target(latLng).build();
+        CameraPosition cameraPosition = new CameraPosition.Builder().zoom(8).target(latLng).build();
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 }
