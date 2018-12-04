@@ -112,8 +112,8 @@ public class ProcurarViagem extends AppCompatActivity {
         Intent intent = new Intent(this, Resultados.class);
         String date = showdate.getText().toString();
         String hm = showtime.getText().toString();
-        String partida = mPartida.getText().toString();
-        String destino = mDestino.getText().toString();
+        String partida = mPartida.getText().toString().toLowerCase();
+        String destino = mDestino.getText().toString().toLowerCase();
         intent.putExtra(PARTIDA_MESSAGE, partida);
         intent.putExtra(DESTINO_MESSAGE, destino);
         intent.putExtra(HORA_MESSAGE, hm);
@@ -128,7 +128,7 @@ public class ProcurarViagem extends AppCompatActivity {
 
     public void getDateFromPicker(int year, int month, int day) {
         String data = Integer.toString(day) + "/" + Integer.toString(month + 1) + "/" + Integer.toString(year);
-        showdate.setText("Data selecionada: " + data);
+        showdate.setText(data);
     }
 
     public void showTimePicker(View view) {
@@ -138,6 +138,6 @@ public class ProcurarViagem extends AppCompatActivity {
 
     public void getTimeFromPicker(int hourOfDay, int minute) {
         String time = Integer.toString(hourOfDay) + ":" + Integer.toString(minute);
-        showtime.setText("Hora: " + time);
+        showtime.setText(time);
     }
 }

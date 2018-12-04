@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -72,9 +73,26 @@ public class PublicarViagem extends AppCompatActivity {
 
     public void publicar(View view) {
 
+        if (partida.getText().toString().equals("") || destino.getText().toString().equals("") || data.getText().toString().equals("") || showtime.getText().toString().equals("") || lugares.getText().toString().equals("") || preco.getText().toString().equals("")) {
+            AlertDialog.Builder alertaCamposVazios = new AlertDialog.Builder(PublicarViagem.this);
+            alertaCamposVazios.setTitle("Aviso");
+            alertaCamposVazios
+                    .setIcon(R.mipmap.ic_warning)
+                    .setMessage("Há campos por preencher!").setCancelable(false)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+            AlertDialog alertDialog = alertaCamposVazios.create();
+            alertDialog.show();
+            return;
+        }
+
         viagem.setEmailUser(mFirebaseUser.getEmail());
-        viagem.setPontoPartida(partida.getText().toString());
-        viagem.setPontoDestino(destino.getText().toString());
+        viagem.setPontoPartida(partida.getText().toString().toLowerCase());
+        viagem.setPontoDestino(destino.getText().toString().toLowerCase());
         viagem.setData(data.getText().toString());
         viagem.setHora(showtime.getText().toString());
         viagem.setLugaresDisponiveis(Integer.parseInt(lugares.getText().toString()));
@@ -113,7 +131,7 @@ public class PublicarViagem extends AppCompatActivity {
 
     public void getDateFromPicker(int year, int month, int day){
         String date = Integer.toString(day) + "/" + Integer.toString(month+1) + "/" + Integer.toString(year);
-        data.setText("Data selecionada: "+ date);
+        data.setText(date);
     }
 
     public void showTimePicker(View view) {
@@ -123,7 +141,7 @@ public class PublicarViagem extends AppCompatActivity {
 
     public void getTimeFromPicker(int hourOfDay, int minute) {
         String time = Integer.toString(hourOfDay) + ":" + Integer.toString(minute);
-        showtime.setText("Hora: " + time);
+        showtime.setText(time);
     }
 
 
