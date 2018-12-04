@@ -4,137 +4,175 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetalhesViagem2">
+    tools:context=".Perfil2">
+
+
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
+            android:id="@+id/linearLayout"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_margin="16dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textPPartidaInfo2"
+
+            <ImageView
+                android:id="@+id/imageUser2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/de"
-                android:textSize="18sp" />
+                android:contentDescription="@string/imagemuser"
+                tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/textPontoPartida2"
+                android:id="@+id/textNomePerfil2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Nome:"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textPChegadaInfo2"
+                android:id="@+id/textNome2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textEmailPerfil2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/para"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textPontoChegada2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:text="Email:"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textDataInfo2"
+                android:id="@+id/textEmail2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textCidadePerfil2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/data"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textData2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:text="Cidade:"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textHoraInfo2"
+                android:id="@+id/textCidade2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textTelemovelPerfil2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/data_e_hora_de_partida"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textHora2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:text="Número de telemovel:"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textLugaresInfo2"
+                android:id="@+id/textNumero2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView122"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Carro - Informações"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textMarca2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:text="@string/lugares_dipon_veis"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textLugaresViagem2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textPrecoInfo2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/pre_o_por_passageiro"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textPrecoViagem2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:text="Marca:"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textComentariosInfo2"
+                android:id="@+id/textMarcaCarro2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/coment_rios"
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textComentarios2"
+                android:id="@+id/textModelo2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Modelo:"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textModeloCarro2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textCor2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Cor:"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textCorCarro2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textAno2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Ano:"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textAnoCarro2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textMatricula2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Matrícula:"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textMatriculaCarro2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:text="Não há comentários relevantes"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/buttonReservar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="reservarViagem"
-                android:text="Reservar"
-                tools:layout_editor_absoluteX="148dp"
-                tools:layout_editor_absoluteY="463dp" />
-
+                android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>
-</android.support.constraint.ConstraintLayout>
 
+</android.support.constraint.ConstraintLayout>

@@ -92,7 +92,7 @@ public class PathViagem extends AppCompatActivity implements OnMapReadyCallback,
         // Output format
         String output = "json";
         // Building the url to the web service
-        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=KEY HERE";
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=AIzaSyA8XwAS7M_lzm_tSNPzIDjqdrlO7S044uE";
         return url;
     }
 
