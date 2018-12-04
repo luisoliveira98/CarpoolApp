@@ -63,7 +63,7 @@ public class ProcurarViagem extends AppCompatActivity {
         //FirebaseUser
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
-        //FirebaseDatabase
+        //FirebaseDatabase0
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
         scan = (Button) findViewById(R.id.qr_code);
         final Activity activity = this;

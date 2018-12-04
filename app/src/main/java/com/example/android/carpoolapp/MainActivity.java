@@ -271,6 +271,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_procurar) {
             intent = new Intent(this, ProcurarViagem.class);
             startActivity(intent);
+        }else if (id == R.id.nav_viagens_resrvadas) {
+            intent = new Intent(this, ViagensReservadas.class);
+            startActivity(intent);
         } else if (id == R.id.nav_localizacao) {
             intent = new Intent(this, PartilharLocalizacao.class);
             startActivity(intent);

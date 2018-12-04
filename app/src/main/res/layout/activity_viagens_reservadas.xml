@@ -9,12 +9,12 @@
     >
 
     <TextView
-        android:textAlignment="center"
-        android:textSize="25sp"
-        android:text="Histórico"
+        android:id="@+id/textViagensReservadas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textViagensReservadas"/>
+        android:text="Viagens reservadas"
+        android:textAlignment="center"
+        android:textSize="25sp" />
 
     <ListView
         android:id="@+id/viagensLst"

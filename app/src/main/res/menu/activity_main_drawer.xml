@@ -14,6 +14,10 @@
             android:icon="@drawable/ic_procurar"
             android:title="@string/procurar" />
         <item
+            android:id="@+id/nav_viagens_resrvadas"
+            android:icon="@drawable/ic_viagens_reservadas"
+            android:title="@string/viagens_reservadas" />
+        <item
             android:id="@+id/nav_localizacao"
             android:icon="@drawable/ic_my_location_black_24dp"
             android:title="@string/partilhar_localiza_o" />

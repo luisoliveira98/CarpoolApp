@@ -37,4 +37,5 @@
     <string name="data">Data:</string>
     <string name="partilhar_localiza_o">Partilhar Localização</string>
     <string name="tracking_viagem">Tracking Viagem</string>
+    <string name="viagens_reservadas">Viagens reservadas</string>
 </resources>
