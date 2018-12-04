@@ -39,6 +39,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.onesignal.OneSignal;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -59,12 +60,14 @@ public class MainActivity extends AppCompatActivity
     private User user;
     private ListView lv;
     private ProgressBar mProgressBar;
+    static String currentUserEmail;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        OneSignal.startInit(this).init();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -91,6 +94,8 @@ public class MainActivity extends AppCompatActivity
         } else {
             mUsername = mFirebaseUser.getDisplayName();
         }
+        currentUserEmail = mFirebaseUser.getEmail();
+        OneSignal.sendTag("User_ID", currentUserEmail);
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
@@ -177,7 +182,7 @@ public class MainActivity extends AppCompatActivity
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 //System.out.println(dataSnapshot.getKey());
                 Viagem viagem = dataSnapshot.getValue(Viagem.class);
-                if (viagem.getEmailUser().equals(mFirebaseUser.getEmail())) {
+                if (viagem.getEmailUser().equals(mFirebaseUser.getEmail()) && !viagem.getEstado().equals(Viagem.State.FINISHED)) {
                     viagens.add(viagem);
                     keys.put(viagem, dataSnapshot.getKey());
                     arrayAdapter.notifyDataSetChanged();
@@ -191,8 +196,6 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                System.out.print("AQUIIII");
 
                 Viagem viagem = dataSnapshot.getValue(Viagem.class);
 

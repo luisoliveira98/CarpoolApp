@@ -16,6 +16,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Date;
+
 public class PublicarViagem extends AppCompatActivity {
 
     private EditText partida,
@@ -111,7 +113,7 @@ public class PublicarViagem extends AppCompatActivity {
 
     public void getDateFromPicker(int year, int month, int day){
         String date = Integer.toString(day) + "/" + Integer.toString(month+1) + "/" + Integer.toString(year);
-        data.setText(date);
+        data.setText("Data selecionada: "+ date);
     }
 
     public void showTimePicker(View view) {
@@ -121,7 +123,7 @@ public class PublicarViagem extends AppCompatActivity {
 
     public void getTimeFromPicker(int hourOfDay, int minute) {
         String time = Integer.toString(hourOfDay) + ":" + Integer.toString(minute);
-        showtime.setText(time);
+        showtime.setText("Hora: " + time);
     }
 
 

@@ -49,7 +49,7 @@ public class ProcurarViagem extends AppCompatActivity {
     public static final String DESTINO_MESSAGE = "com.example.android.carpoolapp.extra.MESSAGE2";
     public static final String HORA_MESSAGE = "com.example.android.carpoolapp.extra.MESSAGE3";
     public static final String DATA_MESSAGE = "com.example.android.carpoolapp.extra.MESSAGE4";
-    //public static final String KEY = "com.example.android.extra.KEY";
+
     private Button scan;
 
     @Override
@@ -128,7 +128,7 @@ public class ProcurarViagem extends AppCompatActivity {
 
     public void getDateFromPicker(int year, int month, int day) {
         String data = Integer.toString(day) + "/" + Integer.toString(month + 1) + "/" + Integer.toString(year);
-        showdate.setText(data);
+        showdate.setText("Data selecionada: " + data);
     }
 
     public void showTimePicker(View view) {
@@ -138,6 +138,6 @@ public class ProcurarViagem extends AppCompatActivity {
 
     public void getTimeFromPicker(int hourOfDay, int minute) {
         String time = Integer.toString(hourOfDay) + ":" + Integer.toString(minute);
-        showtime.setText(time);
+        showtime.setText("Hora: " + time);
     }
 }

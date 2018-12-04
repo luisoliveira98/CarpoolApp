@@ -72,7 +72,7 @@ public class Historico extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Viagem viagem = dataSnapshot.getValue(Viagem.class);
-                if (viagem.getEmailUser().equals(mFireBaseUser.getEmail())){
+                if (viagem.getEmailUser().equals(mFireBaseUser.getEmail()) && viagem.getEstado().equals(Viagem.State.FINISHED)){
                     viagens.add(viagem);
                     keys.put(viagem, dataSnapshot.getKey());
                     arrayAdapter.notifyDataSetChanged();

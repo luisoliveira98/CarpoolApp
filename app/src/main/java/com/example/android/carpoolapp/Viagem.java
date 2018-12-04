@@ -1,6 +1,7 @@
 package com.example.android.carpoolapp;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,21 +47,15 @@ public class Viagem implements Serializable {
         this.pontoPartida = pontoPartida;
     }
 
-    public String getPontoDestino() {
-        return pontoDestino;
-    }
+    public String getPontoDestino() { return pontoDestino; }
 
     public void setPontoDestino(String pontoDestino) {
         this.pontoDestino = pontoDestino;
     }
 
-    public String getData() {
-        return data;
-    }
+    public String getData() { return data; }
 
-    public void setData(String data) {
-        this.data = data;
-    }
+    public void setData(String data) { this.data = data; }
 
     public String getHora() {
         return hora;

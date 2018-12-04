@@ -64,7 +64,7 @@ public class DetalhesViagem extends AppCompatActivity {
         if (!viagem.getComentarios().equals(""))
             textComentarios.setText(viagem.getComentarios());
 
-        if (viagem.getEstado() == Viagem.State.CREATED) {
+        if (viagem.getEstado() == Viagem.State.CREATED || viagem.getEstado().equals(Viagem.State.FULL)) {
             updateStateViagem.setText(buttonComecar);
         }
 
