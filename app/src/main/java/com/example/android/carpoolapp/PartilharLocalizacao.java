@@ -1,5 +1,7 @@
 package com.example.android.carpoolapp;
 
+import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,9 +12,16 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,12 +31,15 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class PartilharLocalizacao extends AppCompatActivity implements LocationListener {
 
     DatabaseReference mFirebaseDatabaseRef;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
+    private EditText editNumero;
+    private Button sendSMS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +49,52 @@ public class PartilharLocalizacao extends AppCompatActivity implements LocationL
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
+        editNumero = (EditText) findViewById(R.id.editNumeroTelemovel);
+        sendSMS = (Button) findViewById(R.id.buttonSms);
+
+        if(ContextCompat.checkSelfPermission(PartilharLocalizacao.this, android.Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(PartilharLocalizacao.this, Manifest.permission.SEND_SMS)) {
+                ActivityCompat.requestPermissions(PartilharLocalizacao.this, new String[]{Manifest.permission.SEND_SMS}, 1);
+            } else {
+                ActivityCompat.requestPermissions(PartilharLocalizacao.this, new String[]{Manifest.permission.SEND_SMS}, 1);
+            }
+        } else {
+            //nao faz nada
+        }
+
         startGettingLocations();
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults ) {
+        switch (requestCode) {
+            case 1 : {
+                if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(PartilharLocalizacao.this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+                        Toast.makeText(this, "Permissões garantidas", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "As permições não estão garantidas!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            return;
+        }
+    }
+
+    public void sendSMS(View view) {
+        String numero = editNumero.getText().toString();
+        String sms = " Segue a minha viagem com o código " + mFirebaseUser.getUid();
+         try {
+             SmsManager smsManager = SmsManager.getDefault();
+             List<String> messages = smsManager.divideMessage(sms);
+             for (String msg : messages) {
+                 smsManager.sendTextMessage(numero, null, msg, null, null);
+             }
+             Toast.makeText(this, "Sms enviada - "+numero, Toast.LENGTH_SHORT).show();
+         } catch (Exception e) {
+             Toast.makeText(this, "Falha no envio da mensagem!", Toast.LENGTH_SHORT).show();
+         }
     }
 
     private ArrayList findUnAskedPermissions(ArrayList<String> wanted) {
@@ -86,7 +143,6 @@ public class PartilharLocalizacao extends AppCompatActivity implements LocationL
     }
 
     private void startGettingLocations() {
-
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         boolean isGPS = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -155,7 +211,7 @@ public class PartilharLocalizacao extends AppCompatActivity implements LocationL
     @Override
     public void onLocationChanged(Location location) {
         ViagemLocalizacao viagemLocalizacao = new ViagemLocalizacao(location.getLongitude(), location.getLatitude(), String.valueOf(new Date().getTime()));
-        mFirebaseDatabaseRef.child("location").child(mFirebaseUser.getUid()).setValue(viagemLocalizacao);
+        mFirebaseDatabaseRef.child("location").child(mFirebaseUser.getProviderId()).setValue(viagemLocalizacao);
         Toast.makeText(this, "Localizaçao atualizada", Toast.LENGTH_SHORT).show();
     }
 
@@ -173,4 +229,6 @@ public class PartilharLocalizacao extends AppCompatActivity implements LocationL
     public void onProviderDisabled(String provider) {
 
     }
+
+
 }

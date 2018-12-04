@@ -70,7 +70,7 @@ public class PosTracking extends FragmentActivity implements OnMapReadyCallback 
 
     private void getLocation() {
 
-        mDatabaseRef.child("location").child("dDBpneSArsdKSjgNpixphWcZuFq2").addValueEventListener(
+        mDatabaseRef.child("location").child(keyUser).addValueEventListener(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
