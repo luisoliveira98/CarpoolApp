@@ -8,14 +8,6 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     >
 
-    <TextView
-        android:textAlignment="center"
-        android:textSize="25sp"
-        android:text="Histórico"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViagensReservadas"/>
-
     <ListView
         android:id="@+id/viagensLst"
         android:layout_width="match_parent"
