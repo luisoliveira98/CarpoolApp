@@ -91,8 +91,8 @@ public class PublicarViagem extends AppCompatActivity {
         }
 
         viagem.setEmailUser(mFirebaseUser.getEmail());
-        viagem.setPontoPartida(partida.getText().toString().toLowerCase());
-        viagem.setPontoDestino(destino.getText().toString().toLowerCase());
+        viagem.setPontoPartida(partida.getText().toString().toUpperCase());
+        viagem.setPontoDestino(destino.getText().toString().toUpperCase());
         viagem.setData(data.getText().toString());
         viagem.setHora(showtime.getText().toString());
         viagem.setLugaresDisponiveis(Integer.parseInt(lugares.getText().toString()));

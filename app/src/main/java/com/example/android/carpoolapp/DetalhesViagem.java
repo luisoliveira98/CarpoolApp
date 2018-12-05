@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.firebase.database.DataSnapshot;
@@ -133,6 +134,7 @@ public class DetalhesViagem extends AppCompatActivity {
 
             case R.id.action_eliminar:
                 mFirebaseDatabase.child("viagens").child(keyViagem).removeValue();
+                Toast.makeText(DetalhesViagem.this, "Viagem eliminada!", Toast.LENGTH_LONG).show();
                 finish();
                 return true;
 

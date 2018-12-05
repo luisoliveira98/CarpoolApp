@@ -112,8 +112,8 @@ public class ProcurarViagem extends AppCompatActivity {
         Intent intent = new Intent(this, Resultados.class);
         String date = showdate.getText().toString();
         String hm = showtime.getText().toString();
-        String partida = mPartida.getText().toString().toLowerCase();
-        String destino = mDestino.getText().toString().toLowerCase();
+        String partida = mPartida.getText().toString().toUpperCase();
+        String destino = mDestino.getText().toString().toUpperCase();
         intent.putExtra(PARTIDA_MESSAGE, partida);
         intent.putExtra(DESTINO_MESSAGE, destino);
         intent.putExtra(HORA_MESSAGE, hm);
