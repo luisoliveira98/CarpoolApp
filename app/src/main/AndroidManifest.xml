@@ -7,8 +7,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.SEND_SMS"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="KEY HERE" />
+            android:value="key here" />
 
         <activity
             android:name=".MainActivity"
@@ -48,26 +48,29 @@
                 android:value="com.example.android.carpoolapp.MainActivity" />
         </activity>
         <activity android:name=".SignInActivity" />
-        <activity android:name=".Perfil"
+        <activity
+            android:name=".Perfil"
             android:label="Perfil"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.carpoolapp.MainActivity" />
         </activity>
-        <activity android:name=".Resultados"
+        <activity
+            android:name=".Resultados"
             android:label="Resultados"
             android:parentActivityName=".ProcurarViagem">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.carpoolapp.ProcurarViagem"/>
+                android:value="com.example.android.carpoolapp.ProcurarViagem" />
         </activity>
-        <activity android:name=".UpdatePerfil"
+        <activity
+            android:name=".UpdatePerfil"
             android:label="Editar Perfil"
             android:parentActivityName=".Perfil">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.carpoolapp.Perfil"/>
+                android:value="com.example.android.carpoolapp.Perfil" />
         </activity>
         <activity
             android:name=".Historico"
@@ -85,27 +88,43 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.carpoolapp.MainActivity" />
         </activity>
-        <activity android:name=".PartilharViagem"
-            android:label="Partilhar Viagem">
-        </activity>
-        <activity android:name=".DetalhesViagem2"
-            android:label="Detalhes da Viagem">
-        </activity>
-        <activity android:name=".PathViagem"
-            android:label="Percurso da Viagem">
-        </activity>
-        <activity android:name=".ReservarViagem"
-            android:label="Reservar Viagem">
-        </activity>
-        <activity android:name=".PartilharLocalizacao"
+        <activity
+            android:name=".PartilharViagem"
+            android:label="Partilhar Viagem"></activity>
+        <activity
+            android:name=".DetalhesViagem2"
+            android:label="Detalhes da Viagem"></activity>
+        <activity
+            android:name=".PathViagem"
+            android:label="Percurso da Viagem"></activity>
+        <activity
+            android:name=".ReservarViagem"
+            android:label="Reservar Viagem"></activity>
+        <activity
+            android:name=".PartilharLocalizacao"
             android:label="Partilhar Localização"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".PosTracking2"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".PosTracking2"
             android:label="Seguir localizção de Utilizador"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".PosTracking"
+            android:label="Seguir localizção de Utilizador"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".Perfil2"
+            android:label="Perfil do Condutor">
+        </activity>
+        <activity
+            android:name=".ViagensReservadas"
+            android:label="Viagens Reservadas"
             android:parentActivityName=".MainActivity">
         </activity>
 
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
     </application>
 

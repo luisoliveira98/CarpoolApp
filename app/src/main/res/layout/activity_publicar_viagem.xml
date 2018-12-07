@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/textLugares"
+                android:id="@+id/nOcupantesText"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_marginTop="24dp"

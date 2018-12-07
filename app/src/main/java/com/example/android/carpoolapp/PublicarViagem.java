@@ -1,23 +1,21 @@
 package com.example.android.carpoolapp;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Date;
 
 public class PublicarViagem extends AppCompatActivity {
 
@@ -35,6 +33,7 @@ public class PublicarViagem extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private Viagem viagem;
+    private String keyviagem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +49,8 @@ public class PublicarViagem extends AppCompatActivity {
         publicar = findViewById(R.id.buttonPublicar);
 
         viagem = (Viagem) getIntent().getExtras().getSerializable("viagem");
+        keyviagem = (String) getIntent().getExtras().getSerializable("key");
+
 
         if(!viagem.getEmailUser().equals(""))
             mostrarDetalhes();
@@ -109,7 +110,12 @@ public class PublicarViagem extends AppCompatActivity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        /*if (getIntent().getClass().equals(DetalhesViagem.class)) {
+                            mFirebaseDatabaseReference.child("viagens").child(keyviagem).removeValue();
+                        }*/
                         mFirebaseDatabaseReference.child("viagens").push().setValue(viagem);
+                        Toast.makeText(PublicarViagem.this, "Viagem Publicada!", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(PublicarViagem.this, MainActivity.class));
                         finish();
                     }
                 })

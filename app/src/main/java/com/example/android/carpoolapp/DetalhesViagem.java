@@ -1,10 +1,8 @@
 package com.example.android.carpoolapp;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,13 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.Auth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 public class DetalhesViagem extends AppCompatActivity {
 
@@ -80,14 +73,16 @@ public class DetalhesViagem extends AppCompatActivity {
     }
 
     public void updateState(View view) {
-        if (viagem.getEstado() == Viagem.State.CREATED) {
+        if (viagem.getEstado() == Viagem.State.CREATED || viagem.getEstado().equals(Viagem.State.FULL)) {
             viagem.setEstado(Viagem.State.STARTED);
+            Toast.makeText(DetalhesViagem.this, "Viagem iniciada!", Toast.LENGTH_LONG).show();
             mFirebaseDatabase.child("viagens").child(keyViagem).setValue(viagem);
             finish();
         }
 
         else if (viagem.getEstado() == Viagem.State.STARTED) {
             viagem.setEstado(Viagem.State.FINISHED);
+            Toast.makeText(DetalhesViagem.this, "Viagem terminada!", Toast.LENGTH_LONG).show();
             mFirebaseDatabase.child("viagens").child(keyViagem).setValue(viagem);
             finish();
         }
@@ -114,6 +109,7 @@ public class DetalhesViagem extends AppCompatActivity {
             case R.id.action_partilhar:
                 intent = new Intent(DetalhesViagem.this, PartilharViagem.class);
                 intent.putExtra("key", keyViagem);
+                intent.putExtra("viagem", viagem);
                 startActivity(intent);
                 return true;
 

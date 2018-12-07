@@ -1,11 +1,12 @@
 package com.example.android.carpoolapp;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.onesignal.OneSignal;
 
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -65,7 +65,7 @@ public class ReservarViagem extends AppCompatActivity {
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            finish();
+                            return;
                         }
                     });
             AlertDialog alertDialog = alerta.create();
@@ -91,6 +91,7 @@ public class ReservarViagem extends AppCompatActivity {
                                 Toast.makeText(ReservarViagem.this, "Viagem Reservada!", Toast.LENGTH_LONG).show();
                                 sendNotification();
                                 finish();
+                                startActivity(new Intent(ReservarViagem.this, ViagensReservadas.class));
                         }
                     })
                     .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
