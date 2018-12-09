@@ -7,7 +7,6 @@ Para conseguir correr a aplicação no seu computador tem de gerar uma chave das
 	
 	-> PathViagem.java
 
-	-> 
-google_maps_api.xml
+	-> google_maps_api.xml
 O login na aplicação é feito através de uma conta google.
 
